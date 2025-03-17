@@ -11,7 +11,12 @@ export const createPost = async (req, res) => {
 };
 
 export const getPosts = async (req, res) => {
-  const posts = await prisma.post.findMany();
+  const { category } = req.query;
+
+  const posts = await prisma.post.findMany({
+    where: category ? { category } : {},
+  });
+
   res.json(posts);
 };
 
