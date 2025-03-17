@@ -5,12 +5,13 @@ import {
   updatePost,
   deletePost,
 } from "../controllers/postController.js";
+import { protect } from "../middlewares/authMiddleware.js";
 
 const router = Router();
 
-router.post("/", createPost);
+router.post("/", protect, createPost);
 router.get("/", getPosts);
-router.put("/:id", updatePost);
-router.delete("/:id", deletePost);
+router.put("/:id", protect, updatePost);
+router.delete("/:id", protect, deletePost);
 
 export default router;
