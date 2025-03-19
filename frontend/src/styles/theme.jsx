@@ -2,20 +2,20 @@ import { createTheme } from "@mui/material/styles";
 
 const theme = createTheme({
   palette: {
-    mode: "dark",
+    mode: "light",
     primary: {
-      main: "#90caf9", // Azul claro
+      main: "#1E3A8A", // Azul oscuro
     },
     secondary: {
-      main: "#f48fb1", // Rosa claro
+      main: "#df3d3d", // Rosa oscuro
     },
     background: {
-      default: "#121212", // Fondo oscuro
-      paper: "#1e1e1e", // Fondo de tarjetas oscuro
+      default: "#f5f5f5", // Fondo claro
+      paper: "#ffffff", // Fondo de tarjetas blanco
     },
     text: {
-      primary: "#ffffff",
-      secondary: "#b0bec5",
+      primary: "#212121", // Texto oscuro
+      secondary: "#757575", // Texto gris
     },
   },
 });
