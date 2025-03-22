@@ -15,6 +15,11 @@ const PostCard = ({ post }) => {
     navigate(`/post/${post.id}`);
   };
 
+  // Limitar la descripción a un máximo de 20 palabras
+  const truncatedContent =
+    post.content.split(" ").slice(0, 10).join(" ") +
+    (post.content.split(" ").length > 10 ? "..." : "");
+
   return (
     <Card sx={{ display: "flex", marginBottom: 2, padding: 2 }}>
       <CardActionArea
@@ -30,7 +35,7 @@ const PostCard = ({ post }) => {
           <CardMedia
             component="img"
             sx={{
-              width: 150,
+              width: 300,
               height: 150,
               objectFit: "cover",
               borderRadius: 2,
@@ -47,8 +52,8 @@ const PostCard = ({ post }) => {
             <Typography variant="h5" component="div" gutterBottom>
               {post.title}
             </Typography>
-            <Typography variant="body1" color="text.secondary" noWrap>
-              {post.content}
+            <Typography variant="body1" color="text.secondary">
+              {truncatedContent}
             </Typography>
             <Typography
               variant="caption"
