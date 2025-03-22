@@ -1,10 +1,10 @@
 import prisma from "../config/prisma.js";
 
 export const createPost = async (req, res) => {
-  const { title, content, category, userId } = req.body;
+  const { title, content, category, img, userId } = req.body;
 
   const post = await prisma.post.create({
-    data: { title, content, category, userId },
+    data: { title, content, category, img, userId },
   });
 
   res.status(201).json(post);
@@ -18,6 +18,21 @@ export const getPosts = async (req, res) => {
   });
 
   res.json(posts);
+};
+
+export const getPostById = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const post = await prisma.post.findUnique({
+      where: { id: parseInt(id) },
+    });
+    if (!post) {
+      return res.status(404).json({ error: "Post no encontrado" });
+    }
+    res.json(post);
+  } catch (error) {
+    res.status(500).json({ error: "Error al obtener el post" });
+  }
 };
 
 export const updatePost = async (req, res) => {

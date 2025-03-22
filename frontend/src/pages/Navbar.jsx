@@ -1,5 +1,6 @@
 import { AppBar, Toolbar, Typography, Button, Avatar } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import { Box } from "@mui/material";
 
 const Navbar = () => {
   const navigate = useNavigate();
@@ -7,26 +8,27 @@ const Navbar = () => {
   return (
     <AppBar position="static">
       <Toolbar>
-        <Avatar
+        <Box
+          component="img"
+          src="https://res.cloudinary.com/df4ghpsiz/image/upload/v1742661142/Group_2_ixliul.png"
           alt="Logo"
-          src="/logo192.png"
-          sx={{ width: 40, height: 40, marginRight: 2 }}
+          sx={{
+            width: 70,
+            height: 50,
+            borderRadius: 0, // Si lo quieres cuadrado
+            marginRight: 2,
+            objectFit: "cover",
+          }}
         />
-        {/* <Typography variant="h6" sx={{ flexGrow: 1 }}>
-          NextStep Blog
-        </Typography> */}
-        <Button color="inherit" onClick={() => navigate("/")}>
-          Home
-        </Button>
-        <Button color="inherit" onClick={() => navigate("/main")}>
+        {/* <Button color="inherit" onClick={() => navigate("/main")}>
           Main
-        </Button>
-        <Button color="inherit" onClick={() => navigate("/login")}>
+        </Button> */}
+        {/* <Button color="inherit" onClick={() => navigate("/login")}>
           Login
-        </Button>
-        <Button color="inherit" onClick={() => navigate("/register")}>
+        </Button> */}
+        {/* <Button color="inherit" onClick={() => navigate("/register")}>
           Register
-        </Button>
+        </Button> */}
       </Toolbar>
     </AppBar>
   );

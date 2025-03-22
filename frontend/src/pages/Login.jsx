@@ -27,17 +27,25 @@ const Login = () => {
         "http://localhost:4000/api/users/login",
         formData
       );
-      console.log(res.data); // 👉 Verifica que el token está llegando correctamente
+      console.log(res.data);
       login(res.data.token);
-      navigate("/main"); // 🔥 Redirige al Home después de iniciar sesión
+      navigate("/main");
     } catch (error) {
       console.error("Login failed:", error);
     }
   };
 
   return (
-    <Container maxWidth="xs">
-      <Box sx={{ mt: 8, textAlign: "center" }}>
+    <Container
+      maxWidth="xs"
+      sx={{
+        height: "100vh", // Toma el 100% de la altura de la pantalla
+        display: "flex",
+        alignItems: "center", // Centra verticalmente
+        justifyContent: "center", // Centra horizontalmente
+      }}
+    >
+      <Box sx={{ textAlign: "center", width: "100%" }}>
         <Typography variant="h4" gutterBottom>
           Iniciar sesión
         </Typography>

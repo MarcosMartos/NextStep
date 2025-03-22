@@ -5,8 +5,16 @@ const Home = () => {
   const navigate = useNavigate();
 
   return (
-    <Container maxWidth="md">
-      <Box sx={{ textAlign: "center", mt: 5 }}>
+    <Container
+      maxWidth="md"
+      sx={{
+        height: "100vh", // Toma el 100% de la altura de la pantalla
+        display: "flex",
+        alignItems: "center", // Centra verticalmente
+        justifyContent: "center", // Centra horizontalmente
+      }}
+    >
+      <Box sx={{ textAlign: "center" }}>
         <Typography variant="h2" component="h1" gutterBottom>
           Bienvenido a NextStep
         </Typography>
