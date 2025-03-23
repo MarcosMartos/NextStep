@@ -29,23 +29,26 @@ const Post = () => {
 
   if (!post) return <Typography align="center">Cargando...</Typography>;
 
+  // Divide el contenido en párrafos usando saltos de línea
+  const paragraphs = post.content.split("\n").filter((p) => p.trim() !== "");
+
   return (
     <Box
       sx={{
         display: "flex",
         justifyContent: "center",
-        padding: 4,
+        padding: { xs: 2, sm: 4 }, // ✅ Padding responsive para móviles
         backgroundColor: "#f9f9f9",
         minHeight: "100vh",
       }}
     >
       <Card
         sx={{
-          maxWidth: 800,
+          maxWidth: { xs: "100%", sm: 600, md: 800 }, // ✅ Ancho adaptable a pantallas más pequeñas
           width: "100%",
           boxShadow: 4,
           borderRadius: 3,
-          overflow: "hidden", // Evita que la imagen sobresalga
+          overflow: "hidden",
         }}
       >
         {post.img && (
@@ -54,7 +57,7 @@ const Post = () => {
             image={post.img}
             alt={post.title}
             sx={{
-              height: 400, // Altura fija para mantener consistencia
+              height: { xs: 200, sm: 300, md: 400 }, // ✅ Altura responsive para la imagen
               objectFit: "cover",
             }}
           />
@@ -63,13 +66,14 @@ const Post = () => {
         <CardContent>
           {/* Título */}
           <Typography
-            variant="h4"
+            variant="h5" // ✅ Tamaño de fuente más pequeño para móviles
             gutterBottom
             sx={{
               fontWeight: "bold",
               color: "#333",
               textAlign: "center",
               marginBottom: 2,
+              fontSize: { xs: 24, sm: 28, md: 32 }, // ✅ Tamaño responsive
             }}
           >
             {post.title}
@@ -78,18 +82,29 @@ const Post = () => {
           {/* Separador */}
           <Divider sx={{ mb: 2 }} />
 
-          {/* Contenido */}
-          <Typography
-            variant="body1"
-            sx={{
-              color: "#555",
-              fontSize: 18,
-              lineHeight: 1.7,
-              textAlign: "justify", // Justifica el contenido para mejor presentación
-            }}
-          >
-            {post.content}
-          </Typography>
+          {/* Contenido separado en párrafos */}
+          {paragraphs.map((paragraph, index) => (
+            <Typography
+              key={index}
+              variant="body1"
+              sx={{
+                color: "#555",
+                fontSize: { xs: 14, sm: 16, md: 18 }, // ✅ Tamaño de texto responsive
+                lineHeight: 1.8,
+                textAlign: "justify",
+                marginBottom: 2,
+                letterSpacing: "0.4px",
+                "&::first-letter": {
+                  fontSize: "20px", // ✅ Sin negrita y tamaño ajustado
+                  fontWeight: "regular",
+                  color: "#555",
+                  marginRight: "4px",
+                },
+              }}
+            >
+              {paragraph}
+            </Typography>
+          ))}
 
           {/* Autor */}
           <Typography
@@ -99,9 +114,10 @@ const Post = () => {
               color: "#999",
               marginTop: 3,
               textAlign: "right",
+              fontSize: { xs: 12, sm: 14 }, // ✅ Tamaño del texto para el autor responsive
             }}
           >
-            Escrito por: <strong>{post.author}</strong>
+            Escrito por: <strong>{post.author || "Anónimo"}</strong>
           </Typography>
         </CardContent>
       </Card>
