@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Container, Typography } from "@mui/material";
 import axios from "axios";
 import PostCard from "./PostCard";
+import { API_URL } from "../config.js";
 
 const PageMain = () => {
   const [posts, setPosts] = useState([]);
@@ -9,7 +10,7 @@ const PageMain = () => {
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        const res = await axios.get("http://localhost:4000/api/posts");
+        const res = await axios.get(`${API_URL}/api/posts`);
         setPosts(res.data);
       } catch (error) {
         console.error("Error al obtener los posts:", error);

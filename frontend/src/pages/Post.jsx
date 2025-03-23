@@ -9,6 +9,8 @@ import {
   CardContent,
   CardMedia,
 } from "@mui/material";
+// ✅ Obtener la URL desde las variables de entorno
+import { API_URL } from "../config.js";
 
 const Post = () => {
   const { id } = useParams();
@@ -17,7 +19,7 @@ const Post = () => {
   useEffect(() => {
     const fetchPost = async () => {
       try {
-        const res = await axios.get(`http://localhost:4000/api/posts/${id}`);
+        const res = await axios.get(`${API_URL}/api/posts/${id}`);
         setPost(res.data);
       } catch (error) {
         console.error("Error fetching post:", error);

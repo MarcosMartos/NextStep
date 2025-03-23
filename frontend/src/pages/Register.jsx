@@ -2,6 +2,7 @@ import { useState } from "react";
 import { TextField, Button, Box, Typography, Container } from "@mui/material";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { API_URL } from "../config.js";
 
 const Register = () => {
   const [formData, setFormData] = useState({
@@ -22,7 +23,7 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("http://localhost:4000/api/users/register", formData);
+      await axios.post(`${API_URL}/api/users/register`, formData);
       navigate("/login");
     } catch (error) {
       console.error("Registration failed:", error);
