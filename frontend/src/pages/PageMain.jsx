@@ -10,12 +10,26 @@ const PageMain = () => {
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        const res = await axios.get(`${API_URL}/api/posts`);
-        setPosts(res.data);
+        const res = await axios.get(`${API_URL}/api/posts`, {
+          withCredentials: true, // necesario si usás autenticación con cookies
+        });
+
+        console.log("API_URL en PageMain:", API_URL);
+
+        if (Array.isArray(res.data)) {
+          setPosts(res.data);
+        } else {
+          console.warn("La respuesta no es un array:", res.data);
+          setPosts([]); // fallback para evitar errores en el render
+        }
       } catch (error) {
-        console.error("Error al obtener los posts:", error);
+        console.error(
+          "Error al obtener los posts:",
+          error.response?.data || error
+        );
       }
     };
+
     fetchPosts();
   }, []);
 
@@ -24,9 +38,8 @@ const PageMain = () => {
       {/* <Typography variant="h3" gutterBottom align="center">
         Posts
       </Typography> */}
-      {posts.map((post) => (
-        <PostCard key={post.id} post={post} />
-      ))}
+      {Array.isArray(posts) &&
+        posts.map((post) => <PostCard key={post.id || post._id} post={post} />)}
     </Container>
   );
 };

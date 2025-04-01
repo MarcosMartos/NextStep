@@ -9,11 +9,23 @@ dotenv.config();
 
 const app = express();
 
+const allowedOrigins = [process.env.FRONTEND_URL, "http://localhost:5173"];
 app.use(
   cors({
-    origin: process.env.FRONTEND_URL, // URL del frontend
-    methods: ["GET", "POST", "PUT", "DELETE"],
+    origin: (origin, callback) => {
+      if (
+        !origin ||
+        origin.includes("localhost") ||
+        origin.includes("netlify.app")
+      ) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
+
     credentials: true,
+    methods: ["GET", "POST", "PUT", "DELETE"],
   })
 );
 

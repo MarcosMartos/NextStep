@@ -27,7 +27,6 @@ const Login = () => {
         "http://localhost:4000/api/users/login",
         formData
       );
-      console.log(res.data);
       login(res.data.token);
       navigate("/main");
     } catch (error) {
